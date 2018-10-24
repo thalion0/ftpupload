@@ -15,7 +15,7 @@ class FTPUpload
 
     public function __construct($strServer, $strUsername, $strPasswort) {
 
-        $this->objConnection = ftp_connect($strServer);
+        $this->objConnection = ftp_connect($strServer) or die("Not able to connect to server.". PHP_EOL);
 
         if(
             !ftp_login($this->objConnection, $strUsername, $strPasswort)
@@ -26,6 +26,18 @@ class FTPUpload
 
         echo "Connected with user " . $strUsername . PHP_EOL;
         echo "Current directory: " . ftp_pwd($this->objConnection) . PHP_EOL;
+
+
+    }
+
+    public function __destruct()
+    {
+
+        if( is_resource($this->objConnection) ) if( ftp_close($this->objConnection) === true ) {
+            echo "Connection closed" . PHP_EOL;
+        } else {
+            echo "Error closing connection";
+        }
 
 
     }
