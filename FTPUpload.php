@@ -8,11 +8,21 @@
  * Time: 17:25
  */
 
+/**
+ * Class FTPUpload
+ *
+ */
 class FTPUpload
 {
 
     private $objConnection;
 
+    /**
+     * FTPUpload constructor.
+     * @param $strServer
+     * @param $strUsername
+     * @param $strPasswort
+     */
     public function __construct($strServer, $strUsername, $strPasswort) {
 
         $this->objConnection = ftp_connect($strServer) or die("Not able to connect to server.". PHP_EOL);
@@ -30,6 +40,9 @@ class FTPUpload
 
     }
 
+    /**
+     *
+     */
     public function __destruct()
     {
 
@@ -42,6 +55,10 @@ class FTPUpload
 
     }
 
+    /**
+     * @param $strLocalDir
+     * @param $strRemoteDir
+     */
     public function Upload($strLocalDir, $strRemoteDir) {
 
         $dirLocal = opendir($strLocalDir);
